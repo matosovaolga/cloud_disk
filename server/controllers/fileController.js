@@ -12,6 +12,7 @@ class FileController {
 
       const parentFile = await File.findOne({ _id: parent_id });
       if (!parentFile) {
+		console.log('here')
         file.path = name;
         await fileService.createDir(file);
       } else {

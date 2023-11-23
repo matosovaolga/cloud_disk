@@ -4,7 +4,6 @@ const config = require("config");
 
 class FileService {
   createDir(file) {
-	
     const filePath = `${config.get("filePath")}/${file.user_id}/${file.path}`;
     return new Promise((resolve, reject) => {
       try {
@@ -15,8 +14,7 @@ class FileService {
           return reject({ message: "File already exists" });
         }
       } catch (e) {
-
-		console.log(e)
+        console.log(e);
         return reject({ message: "File error" });
       }
     });

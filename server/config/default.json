@@ -2,5 +2,5 @@
   "serverPort": 4000,
   "dbUrl": "mongodb+srv://separateSpace:gT0JxypsNbw84OQ4@cloud.kygeedl.mongodb.net/cloud?retryWrites=true&w=majority",
   "secretKey": "SSPC-cloud-files",
-  "filePath": "/Users/olgamatosova/Documents/work/cloud_disk/server/files/"
+  "filePath": "/Users/olgamatosova/Documents/work/cloud_disk/server/files"
 }
