@@ -131,10 +131,12 @@ class FileController {
         user_id: req.user.id,
       });
 
-      const path = `${config.get("filePath")}/${req.user.id}/${file.path}`;
+      const path = fileService.getPath(file);
+
       if (fs.existsSync(path)) {
         return res.download(path, file.name);
       }
+
       return res.status(400).json({ message: "File not found" });
     } catch (error) {
       console.log(error);
@@ -148,25 +150,33 @@ class FileController {
         _id: req.query.id,
         user_id: req.user.id,
       });
-   
+
       const parent = await File.findOne({
         user_id: req.user.id,
         _id: file.parent_id,
       });
+
       const user = await User.findOne({ _id: req.user.id });
-        console.log(parent);
-        if (parent) {
-          parent.size = parent.size - file.size;
-        }
+
+      if (parent) {
+        parent.size = parent.size - file.size;
+      }
+
       if (!file) return res.status(400).json({ message: "File not found" });
+
+      if (parent) {
         await parent.save();
+      }
+
       fileService.deleteFile(file);
+
       user.usedSpace = user.usedSpace - file.size;
 
       await file.deleteOne({
         _id: req.query.id,
         user_id: req.user.id,
       });
+	  
       await user.save();
 
       return res.status(200).json({ message: "File was deleted" });

@@ -4,7 +4,7 @@ const config = require("config");
 
 class FileService {
   createDir(file) {
-    const filePath = `${config.get("filePath")}/${file.user_id}/${file.path}`;
+    const filePath = this.getPath(file);
     return new Promise((resolve, reject) => {
       try {
         if (!fs.existsSync(!filePath)) {
@@ -19,6 +19,7 @@ class FileService {
       }
     });
   }
+
   deleteFile(file) {
     const path = this.getPath(file);
     if (file.type === "dir") {
