@@ -114,7 +114,7 @@ class FileController {
       });
 
       await dbFile.save();
-      await parent.save();
+      if (parent) await parent.save();
       await user.save();
 
       res.json(dbFile);
@@ -176,7 +176,7 @@ class FileController {
         _id: req.query.id,
         user_id: req.user.id,
       });
-	  
+
       await user.save();
 
       return res.status(200).json({ message: "File was deleted" });
