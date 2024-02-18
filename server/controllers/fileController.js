@@ -14,11 +14,11 @@ class FileController {
       const parentFile = await File.findOne({ _id: parent_id });
       if (!parentFile) {
         file.path = name;
-        await fileService.createDir(file);
+        await fileService.createDir(req, file);
       } else {
         file.path = `${parentFile.path}/${file.name}`;
 
-        await fileService.createDir(file);
+        await fileService.createDir(req, file);
         parentFile.children.push(file._id);
         await parentFile.save();
       }
@@ -87,12 +87,12 @@ class FileController {
       user.usedSpace = user.usedSpace + file.size;
 
       if (parent) {
-        path = `${config.get("filePath")}/${user._id}/${parent.path}/${
+        path = `${req.filePath}/${user._id}/${parent.path}/${
           file.name
         }`;
         parent.size += file.size;
       } else {
-        path = `${config.get("filePath")}/${user._id}/${file.name}`;
+        path = `${req.filePath}/${user._id}/${file.name}`;
       }
 
       if (fs.existsSync(path)) {
@@ -110,7 +110,7 @@ class FileController {
         type,
         size: file.size,
         path: filePath,
-        parent_id: parent?._id,
+        parent_id: parent ? parent._id : null,
         user_id: user._id,
       });
 
@@ -132,7 +132,7 @@ class FileController {
         user_id: req.user.id,
       });
 
-      const path = fileService.getPath(file);
+      const path = fileService.getPath(req, file);
 
       if (fs.existsSync(path)) {
         return res.download(path, file.name);
@@ -169,7 +169,7 @@ class FileController {
         await parent.save();
       }
 
-      fileService.deleteFile(file);
+      fileService.deleteFile(req, file);
 
       user.usedSpace = user.usedSpace - file.size;
 
