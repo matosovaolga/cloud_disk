@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const config = require("config");
 const fileUpload = require("express-fileupload");
 const authRouter = require("./routes/auth.routes");
-const connectionString = process.env.DATABASE_URL || config.get("dbUrl");
 const fileRouter = require("./routes/file.routes");
 const app = express();
 const PORT = process.env.PORT || config.get("serverPort");
@@ -24,7 +23,7 @@ app.use("/api/files", fileRouter);
 
 const start = async () => {
   try {
-    mongoose.connect(connectionString);
+    mongoose.connect(config.get("dbUrl"));
     app.listen(PORT, () => {
       console.log(`Server start on port ${PORT}`);
     });
