@@ -1,0 +1,14 @@
+@import "../../utils/colors.scss";
+
+.card {
+  background-color: $white;
+  border: 1px solid lightgray;
+  box-shadow: $box-shadow;
+  width: 100%;
+  border-radius: 7px !important;
+
+
+  &_body {
+    padding: 1.25rem;
+  }
+}

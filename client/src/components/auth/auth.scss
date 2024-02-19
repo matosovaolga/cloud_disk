@@ -1,0 +1,59 @@
+@import "../../utils/colors.scss";
+
+.registration_wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 776px;
+  margin: 5vh auto;
+  gap: 1.5em;
+}
+
+.regFormWrp > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: -1.25rem;
+}
+
+.left_side {
+  border-right: 1px solid lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.right_side {
+  padding: 20px 36px 50px;
+}
+
+.title {
+  font-size: 1.75rem;
+  color: $color;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.title_subtext {
+  margin: 0 0 24px 0;
+  color: $muted;
+}
+
+.formBtn {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.signUp_link {
+  color: $muted;
+  font-size: 13px;
+  margin-top: 20px;
+
+  a {
+	color: $primary-bg-color;
+	text-decoration: none;
+
+	&:hover {
+		color: $primary-bg-hover;
+	}
+  }
+}

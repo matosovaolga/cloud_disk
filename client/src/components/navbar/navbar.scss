@@ -1,0 +1,57 @@
+@import "../../utils/colors.scss";
+@import "../../utils/typography.scss";
+@import "../../utils/animations.scss";
+
+.navbar {
+  border-block-end: 1px solid var(--border);
+
+  border-bottom: 1px solid lightgray;
+  width: 100%;
+
+  background-color: $white;
+  box-shadow: $box-shadow;
+  padding: 10px 30px;
+
+  & > div {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 10px;
+    align-items: center;
+    height: 66px;
+  }
+}
+.defaultAva {
+  background-color: $secondary-bg-color;
+  width: 30px;
+  overflow: hidden;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  
+  svg {
+    width: 15px;
+    fill: #fff;
+  }
+  img {
+	width: 100%;
+  }
+}
+.link {
+  cursor: pointer;
+  transition: $animations;
+  color: $color;
+  text-decoration: none;
+  &:hover {
+    color: $info-bg-color;
+  }
+}
+
+.navbar_signout {
+  cursor: pointer;
+  transition: $animations;
+  &:hover {
+    color: $info-bg-color;
+  }
+}

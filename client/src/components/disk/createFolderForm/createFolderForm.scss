@@ -1,0 +1,9 @@
+.createFolderForm {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	&_input {
+		margin-bottom: 20px;
+	}
+}

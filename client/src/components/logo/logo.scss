@@ -1,0 +1,8 @@
+@import "../../utils/colors.scss";
+.logo {
+  font-weight: 500;
+  margin: 0;
+  span {
+    color: $primary-bg-color;
+  }
+}
