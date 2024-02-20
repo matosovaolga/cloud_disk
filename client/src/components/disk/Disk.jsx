@@ -12,7 +12,7 @@ import { Transition } from "react-transition-group";
 const Disk = (props) => {
   const dispatch = useDispatch();
   const { diskSpace, usedSpace } = useSelector(
-    (state) => state.user.currentUser
+    (state) => state.user.currentUser.user
   );
   const sort = useSelector((state) => state.files.sortStatus);
   const [folderNameDialog, setFolderNameDialog] = useState(false);
