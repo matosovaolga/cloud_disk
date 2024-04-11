@@ -1,0 +1,35 @@
+@import "../../../../utils/colors.scss";
+.folder {
+  &Card {
+    transition: all 0.4s ease;
+    position: relative;
+    top: 0;
+    &:hover {
+      cursor: pointer;
+
+      top: -5px;
+    }
+  }
+
+  &Icon {
+    max-width: 50px;
+    height: 50px;
+    height: auto;
+    background: lighten($primary-bg-color, 20%);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+
+    svg {
+      max-width: 100%;
+      height: auto;
+      fill: $primary-bg-hover;
+    }
+  }
+
+  &Title {
+    text-transform: capitalize;
+  }
+}

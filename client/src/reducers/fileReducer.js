@@ -46,6 +46,7 @@ export default function fileReducer(state = defaultState, action) {
         ...state,
         folderStack: [...state.folderStack, action.payload],
       };
+
     case POP_FROM_STACK:
       return {
         ...state,
@@ -92,5 +93,5 @@ export const popFromStack = (folder) => ({
 
 export const setView = (view) => ({
   type: SET_VIEW,
-  payload: view, 
+  payload: view,
 });
