@@ -8,10 +8,11 @@ import Card from "../../card/Card.component";
 import { popFromStack, setCurrentDir } from "../../../reducers/fileReducer";
 import s from "./DiskSidebar.module.scss";
 import cn from "classnames";
+import { uploadFile } from "../../../actions/file";
 const DiskSidebar = (props) => {
-  const [uploadFile, setUploadFile] = useState(false);
+  const [uploadFileModal, setUploadFile] = useState(false);
   const dispatch = useDispatch();
-
+  const currentDir = useSelector((state) => state.files.currentDir);
   const { usedSpace, diskSpace } = props.storage;
 
   const folderStack = useSelector((state) => state.files.folderStack);
@@ -20,6 +21,17 @@ const DiskSidebar = (props) => {
     const backDirId = folderStack[folderStack.length - 1];
     dispatch(popFromStack(backDirId));
     dispatch(setCurrentDir(backDirId));
+  };
+
+  const fileUploadHandler = (e) => {
+    const files = [...e.target.files];
+    files.forEach((file) => dispatch(uploadFile(file, currentDir)));
+    setUploadFile(false);
+  };
+
+  const createFolderhandler = () => {
+    props.storage.setFolderNameDialog(true);
+    setUploadFile(false);
   };
 
   return (
@@ -35,7 +47,12 @@ const DiskSidebar = (props) => {
         >
           Create new +
         </Button>
-        <Transition in={uploadFile} timeout={500} mountOnEnter unmountOnExit>
+        <Transition
+          in={uploadFileModal}
+          timeout={500}
+          mountOnEnter
+          unmountOnExit
+        >
           {(state) => (
             <Modal
               state={state}
@@ -43,13 +60,23 @@ const DiskSidebar = (props) => {
               close={setUploadFile}
             >
               <div className={s.btnGroup}>
-                <Button btnStyle="secondary" type="button">
-                  Upload File
-                </Button>
+                <div className={s.uploaderWrap}>
+                  <label htmlFor="upload_input" className={s.upload_label}>
+                    Upload file
+                  </label>
+                  <input
+                    type="file"
+                    id="upload_input"
+                    className={s.upload_input}
+                    onChange={(e) => fileUploadHandler(e)}
+                    multiple={true}
+                  />
+                </div>
+
                 <Button
                   btnStyle="primary"
                   type="button"
-                  onClick={() => props.storage.setFolderNameDialog(true)}
+                  onClick={() => createFolderhandler()}
                 >
                   Create folder
                 </Button>
