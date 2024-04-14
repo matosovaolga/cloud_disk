@@ -41,7 +41,11 @@ const Disk = (props) => {
         unmountOnExit
       >
         {(state) => (
-          <Modal state={state} close={setFolderNameDialog}>
+          <Modal
+            state={state}
+            close={setFolderNameDialog}
+            title={"Create new folder"}
+          >
             <CreateFolderForm createFolder={creadeFolderHandler} />
           </Modal>
         )}
