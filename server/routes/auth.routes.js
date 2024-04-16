@@ -57,8 +57,11 @@ router.post(
       const hashPassword = await bcrypt.hash(password, 8);
       const user = new User({ email, password: hashPassword, name });
       await user.save();
-  
-      await fileService.createDir(req, new File({ user_id: user.id, name: "" }));
+
+      await fileService.createDir(
+        req,
+        new File({ user_id: user.id, name: "" })
+      );
       return res.json({ message: "User was created successfully" });
     } catch (e) {
       console.log(e);
@@ -74,6 +77,18 @@ router.post(
     try {
       const { email, password } = req.body;
       const user = await User.findOne({ email });
+      res.setHeader("Access-Control-Allow-Credentials", true);
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      // another common pattern
+      // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+      res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET,OPTIONS,PATCH,DELETE,POST,PUT"
+      );
+      res.setHeader(
+        "Access-Control-Allow-Headers",
+        "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
+      );
       if (!user) {
         return res.status(400).json({ message: "Invalid email or password" });
       }
@@ -84,6 +99,7 @@ router.post(
       const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
         expiresIn: "1h",
       });
+
       return res.json({
         token,
         user: {
