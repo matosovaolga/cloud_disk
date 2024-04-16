@@ -15,7 +15,7 @@ const Navbar = () => {
 
   const avatarIcon = currUser.avatar ? (
     <div className="defaultAva">
-      <img src={API_URL + currUser.avatar} alt="" />
+      <img src={process.env.REACT_APP_API_URL + currUser.avatar} alt="" />
     </div>
   ) : (
     <div className="defaultAva">
