@@ -4,7 +4,7 @@ const config = require("config");
 const fileUpload = require("express-fileupload");
 const authRouter = require("./routes/auth.routes");
 const fileRouter = require("./routes/file.routes");
-// const PORT = process.env.PORT || config.get("serverPort");
+const PORT = process.env.PORT || config.get("serverPort");
 const app = express();
 
 const corsMiddleware = require("./middleware/cors.middleware");
@@ -27,8 +27,8 @@ app.get("/", (req, res) => res.send("Express on Vercel"));
 const start = async () => {
   try {
     mongoose.connect(config.get("dbUrl"));
-    app.listen(config.get("serverPort"), () => {
-      console.log(`Server start on port ${config.get("serverPort")}`);
+    app.listen(PORT, () => {
+      console.log(`Server start on port ${PORT}`);
     });
   } catch (e) {
     console.log(e);
