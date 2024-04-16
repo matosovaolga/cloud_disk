@@ -20,7 +20,7 @@ const corsOptions = {
 const app = express();
 app.use(cors(corsOptions));
 
-// const corsMiddleware = require("./middleware/cors.middleware");
+const corsMiddleware = require("./middleware/cors.middleware");
 const filePathMiddleware = require("./middleware/filepath.middleware");
 
 const path = require("path");
@@ -28,7 +28,7 @@ const path = require("path");
 
 
 app.use(fileUpload({}));
-// app.use(corsMiddleware());
+app.use(corsMiddleware());
 
 app.use(filePathMiddleware(path.resolve(__dirname, "files")));
 
