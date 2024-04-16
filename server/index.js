@@ -8,7 +8,7 @@ const fileRouter = require("./routes/file.routes");
 // const PORT = process.env.PORT || config.get("serverPort");
 const app = express();
 
-const corsMiddleware = require("./middleware/cors.middleware");
+// const corsMiddleware = require("./middleware/cors.middleware");
 const filePathMiddleware = require("./middleware/filepath.middleware");
 
 const path = require("path");
@@ -29,10 +29,6 @@ app.use(express.json());
 app.use(express.static("static"));
 app.use("/api/auth", authRouter);
 app.use("/api/files", fileRouter);
-
-app.get("/", (req, res) => res.send("Express on Vercel"));
-
-// app.listen(3000, () => console.log("Server ready on port 3000."));
 
 const start = async () => {
   try {
