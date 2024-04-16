@@ -4,7 +4,7 @@ const config = require("config");
 const fileUpload = require("express-fileupload");
 const authRouter = require("./routes/auth.routes");
 const fileRouter = require("./routes/file.routes");
-const PORT = process.env.PORT || config.get("serverPort");
+// const PORT = process.env.PORT || config.get("serverPort");
 const app = express();
 
 const corsMiddleware = require("./middleware/cors.middleware");
