@@ -1,5 +1,5 @@
 {
-  "serverPort": 4000,
+  "serverPort": 3000,
 
   "dbUrl": "mongodb+srv://separateSpace:gT0JxypsNbw84OQ4@cloud.kygeedl.mongodb.net/cloud?retryWrites=true&w=majority",
   "secretKey": "SSPC-cloud-files",

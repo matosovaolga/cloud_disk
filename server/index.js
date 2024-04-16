@@ -20,17 +20,15 @@ app.use(express.static("static"));
 app.use("/api/auth", authRouter);
 app.use("/api/files", fileRouter);
 
-app.get("/", (req, res) =>
-  res.send("Express on Vercel" + config.get("serverPort"))
-);
+app.get("/", (req, res) => res.send("Express on Vercel"));
 
 // app.listen(3000, () => console.log("Server ready on port 3000."));
 
 const start = async () => {
   try {
     mongoose.connect(config.get("dbUrl"));
-    app.listen(3000, () => {
-      console.log(`Server start on port ${3000}`);
+    app.listen(config.get("serverPort"), () => {
+      console.log(`Server start on port ${config.get("serverPort")}`);
     });
   } catch (e) {
     console.log(e);
