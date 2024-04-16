@@ -17,7 +17,8 @@ const corsOptions = {
   origin: "https://cloud-disk-server.vercel.app/",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}
 
 app.use(fileUpload({}));
 // app.use(corsMiddleware());
