@@ -22,6 +22,19 @@ app.use("/api/files", fileRouter);
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
-app.listen(3000, () => console.log("Server ready on port 3000."));
+// app.listen(3000, () => console.log("Server ready on port 3000."));
+
+const start = async () => {
+  try {
+    mongoose.connect(config.get("dbUrl"));
+    app.listen(3000, () => {
+      console.log(`Server start on port ${3000}`);
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+start();
 
 module.exports = app;
