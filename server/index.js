@@ -17,6 +17,8 @@ app.use(filePathMiddleware(path.resolve(__dirname, "files")));
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
-app.listen(3000, () => console.log("Server ready on port 3000."));
+app.listen(config.get("serverPort"), () =>
+  console.log("Server ready on port 3000.")
+);
 
 module.exports = app;
