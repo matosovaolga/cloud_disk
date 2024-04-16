@@ -14,10 +14,10 @@ const filePathMiddleware = require("./middleware/filepath.middleware");
 const path = require("path");
 
 const corsOptions = {
-  origin: "*",
+  origin: "https://cloud-disk-server.vercel.app/",
 
-  methods: ["GET", "POST"],
-
+  methods: ["GET", "POST", "PUT", "DELETE"],
+	credentials: true,
   allowedHeaders: ["Content-Type"], // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 

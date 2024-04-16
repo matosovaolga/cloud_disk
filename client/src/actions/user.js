@@ -15,7 +15,6 @@ export const registration = async (email, password, name) => {
 };
 export const login = (email, password) => {
   return async (dispatch) => {
-	console.log(process.env.REACT_APP_API_URL);
 
     try {
       const response = await axios.post(
@@ -25,7 +24,7 @@ export const login = (email, password) => {
           password,
         }
       );
-	  console.log(response.data);
+
       dispatch(setUser(response.data));
       localStorage.setItem("token", response.data.token);
     } catch (e) {
@@ -36,11 +35,15 @@ export const login = (email, password) => {
 
 export const auth = () => {
   return async (dispatch) => {
+	
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}api/auth/auth`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+          headers: {
+            Accept: "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
       );
       dispatch(setUser(response.data));
