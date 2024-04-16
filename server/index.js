@@ -4,7 +4,7 @@ const config = require("config");
 const fileUpload = require("express-fileupload");
 const authRouter = require("./routes/auth.routes");
 const fileRouter = require("./routes/file.routes");
-const PORT = config.get("serverPort");
+// const PORT = process.env.PORT || config.get("serverPort");
 const app = express();
 
 const corsMiddleware = require("./middleware/cors.middleware");
@@ -20,7 +20,7 @@ app.use(express.static("static"));
 app.use("/api/auth", authRouter);
 app.use("/api/files", fileRouter);
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+// app.get("/", (req, res) => res.send("Express on Vercel"));
 
 // app.listen(3000, () => console.log("Server ready on port 3000."));
 
