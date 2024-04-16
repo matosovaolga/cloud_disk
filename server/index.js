@@ -20,7 +20,7 @@ app.use(express.static("static"));
 app.use("/api/auth", authRouter);
 app.use("/api/files", fileRouter);
 
-// app.get("/", (req, res) => res.send("Express on Vercel"));
+app.get("/", (req, res) => res.send("Express on Vercel"));
 
 // app.listen(3000, () => console.log("Server ready on port 3000."));
 
