@@ -3,19 +3,14 @@ const mongoose = require("mongoose");
 const config = require("config");
 const fileUpload = require("express-fileupload");
 const authRouter = require("./routes/auth.routes");
+const cors = require("cors");
 const fileRouter = require("./routes/file.routes");
 // const PORT = process.env.PORT || config.get("serverPort");
 const app = express();
 
 const corsMiddleware = require("./middleware/cors.middleware");
 const filePathMiddleware = require("./middleware/filepath.middleware");
-app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  next();
-});
+app.use(cors());
 const path = require("path");
 
 app.use(fileUpload({}));
