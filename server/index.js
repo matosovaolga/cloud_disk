@@ -9,6 +9,11 @@ const app = express();
 
 const corsMiddleware = require("./middleware/cors.middleware");
 const filePathMiddleware = require("./middleware/filepath.middleware");
+const path = require("path");
+
+app.use(fileUpload({}));
+app.use(corsMiddleware);
+app.use(filePathMiddleware(path.resolve(__dirname, "files")));
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
