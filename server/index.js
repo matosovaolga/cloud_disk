@@ -14,11 +14,17 @@ const filePathMiddleware = require("./middleware/filepath.middleware");
 const path = require("path");
 
 const corsOptions = {
-  origin: "https://cloud-disk-server.vercel.app/",
+  origin: "cloud-disk-server.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"]
-}
+  //   credentials: true,
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "Origin",
+    "X-Requested-With",
+    "Accept",
+  ],
+};
 
 app.use(fileUpload({}));
 // app.use(corsMiddleware());
