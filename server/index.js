@@ -10,11 +10,20 @@ const app = express();
 
 const corsMiddleware = require("./middleware/cors.middleware");
 const filePathMiddleware = require("./middleware/filepath.middleware");
-app.use(cors());
+
 const path = require("path");
 
+const corsOptions = {
+  origin: "*",
+
+  methods: ["GET", "POST"],
+
+  allowedHeaders: ["Content-Type"], // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
 app.use(fileUpload({}));
-app.use(corsMiddleware);
+// app.use(corsMiddleware());
+app.use(cors(corsOptions));
 app.use(filePathMiddleware(path.resolve(__dirname, "files")));
 
 app.use(express.json());
