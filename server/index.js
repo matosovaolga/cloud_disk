@@ -27,8 +27,8 @@ app.get("/", (req, res) => res.send("Express on Vercel"));
 const start = async () => {
   try {
     mongoose.connect(config.get("dbUrl"));
-    app.listen(config.get("serverPort"), () => {
-      console.log(`Server start on port ${config.get("serverPort")}`);
+    app.listen(process.env.PORT, () => {
+      console.log(`Server start on port ${process.env.PORT}`);
     });
   } catch (e) {
     console.log(e);
@@ -37,4 +37,4 @@ const start = async () => {
 
 start();
 
-// module.exports = app;
+module.exports = app;
