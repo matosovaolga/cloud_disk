@@ -27,8 +27,8 @@ app.get("/", (req, res) => res.send("Express on Vercel"));
 const start = async () => {
   try {
     mongoose.connect(config.get("dbUrl"));
-    app.listen(PORT, () => {
-      console.log(`Server start on port ${PORT}`);
+    app.listen(config.get("serverPort"), () => {
+      console.log(`Server start on port ${config.get("serverPort")}`);
     });
   } catch (e) {
     console.log(e);
