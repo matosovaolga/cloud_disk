@@ -6,12 +6,12 @@ const authRouter = require("./routes/auth.routes");
 // const cors = require("cors");
 const fileRouter = require("./routes/file.routes");
 
-const corsOptions = {
-  origin: "",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization", "Origin", "Accept"],
-};
+// const corsOptions = {
+//   origin: "",
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true,
+//   allowedHeaders: ["Content-Type", "Authorization", "Origin", "Accept"],
+// };
 
 const app = express();
 // app.use(cors());
