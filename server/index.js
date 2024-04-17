@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const config = require("config");
 const fileUpload = require("express-fileupload");
 const authRouter = require("./routes/auth.routes");
-const cors = require("cors");
+// const cors = require("cors");
 const fileRouter = require("./routes/file.routes");
 
 const corsOptions = {
@@ -14,7 +14,7 @@ const corsOptions = {
 };
 
 const app = express();
-app.use(cors());
+// app.use(cors());
 
 // app.get("/", cors(), function (req, res, next) {
 //   res.json({ msg: "This is CORS-enabled for a Single Route" });
