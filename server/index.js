@@ -44,7 +44,7 @@ app.use("/api/files", fileRouter);
 const start = async () => {
   try {
     mongoose.connect(config.get("dbUrl"));
-    app.listen(process.env.PORT, () => {
+    app.listen(3000, () => {
       console.log(`Server start on port ${process.env.PORT}`);
     });
   } catch (e) {
