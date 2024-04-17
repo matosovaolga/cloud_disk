@@ -5,27 +5,25 @@ const fileUpload = require("express-fileupload");
 const authRouter = require("./routes/auth.routes");
 const cors = require("cors");
 const fileRouter = require("./routes/file.routes");
-// const PORT = process.env.PORT || config.get("serverPort");
+
 const corsOptions = {
   origin: "",
   methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "Origin",
-    "Accept",
-  ],
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization", "Origin", "Accept"],
 };
+
 const app = express();
-app.use(cors(corsOptions));
+app.use(cors());
+
+app.get("/", cors(), function (req, res, next) {
+  res.json({ msg: "This is CORS-enabled for a Single Route" });
+});
 
 const corsMiddleware = require("./middleware/cors.middleware");
 const filePathMiddleware = require("./middleware/filepath.middleware");
 
 const path = require("path");
-
-
 
 app.use(fileUpload({}));
 app.use(corsMiddleware());
