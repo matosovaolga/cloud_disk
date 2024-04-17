@@ -16,9 +16,9 @@ const corsOptions = {
 const app = express();
 app.use(cors());
 
-app.get("/", cors(), function (req, res, next) {
-  res.json({ msg: "This is CORS-enabled for a Single Route" });
-});
+// app.get("/", cors(), function (req, res, next) {
+//   res.json({ msg: "This is CORS-enabled for a Single Route" });
+// });
 
 const corsMiddleware = require("./middleware/cors.middleware");
 const filePathMiddleware = require("./middleware/filepath.middleware");
