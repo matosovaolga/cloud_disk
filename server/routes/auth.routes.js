@@ -57,8 +57,11 @@ router.post(
       const hashPassword = await bcrypt.hash(password, 8);
       const user = new User({ email, password: hashPassword, name });
       await user.save();
-  
-      await fileService.createDir(req, new File({ user_id: user.id, name: "" }));
+
+      await fileService.createDir(
+        req,
+        new File({ user_id: user.id, name: "" })
+      );
       return res.json({ message: "User was created successfully" });
     } catch (e) {
       console.log(e);
@@ -74,7 +77,7 @@ router.post(
     try {
       const { email, password } = req.body;
       const user = await User.findOne({ email });
-	  
+
       if (!user) {
         return res.status(400).json({ message: "Invalid email or password" });
       }
@@ -107,6 +110,9 @@ router.post(
 module.exports = router;
 
 router.get("/auth", authMiddleware, async (req, res) => {
+  res.header(`Access-Control-Allow-Origin`, `*`);
+  res.header(`Access-Control-Allow-Methods`, `GET,PUT,POST,DELETE`);
+  res.header(`Access-Control-Allow-Headers`, `Content-Type`);
   try {
     const user = await User.findOne({ _id: req.user.id });
     const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
