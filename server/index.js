@@ -33,12 +33,12 @@ app.use(filePathMiddleware(path.resolve(__dirname, "files")));
 
 app.use(express.json());
 app.use(express.static("static"));
-app.options("/", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.sendStatus(204);
-});
+// app.options("/", (req, res) => {
+//   res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
+//   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+//   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+//   res.sendStatus(204);
+// });
 app.use("/api/auth", authRouter);
 app.use("/api/files", fileRouter);
 
