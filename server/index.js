@@ -27,7 +27,7 @@ const filePathMiddleware = require("./middleware/filepath.middleware");
 const path = require("path");
 
 app.use(fileUpload({}));
-app.use(corsMiddleware());
+// app.use(corsMiddleware());
 
 app.use(filePathMiddleware(path.resolve(__dirname, "files")));
 
