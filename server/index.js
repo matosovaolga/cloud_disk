@@ -3,7 +3,7 @@ var cors = require("cors");
 var app = express();
 
 var corsOptions = {
-  origin: "http://example.com",
+  origin: "https://cloud-disk-client-nu.vercel.app/login",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
