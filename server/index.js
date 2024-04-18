@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const config = require("config");
 const fileUpload = require("express-fileupload");
 const authRouter = require("./routes/auth.routes");
-// const cors = require("cors");
+const cors = require("cors");
 const fileRouter = require("./routes/file.routes");
 // const PORT = process.env.PORT || config.get("serverPort");
 // const corsOptions = {
@@ -19,9 +19,9 @@ const fileRouter = require("./routes/file.routes");
 //   ],
 // };
 const app = express();
-// app.use(cors());
+app.use(cors());
 
-const corsMiddleware = require("./middleware/cors.middleware");
+// const corsMiddleware = require("./middleware/cors.middleware");
 const filePathMiddleware = require("./middleware/filepath.middleware");
 
 const path = require("path");
