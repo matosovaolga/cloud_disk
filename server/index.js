@@ -21,31 +21,19 @@ const fileRouter = require("./routes/file.routes");
 const app = express();
 // app.use(cors());
 
-// const corsMiddleware = require("./middleware/cors.middleware");
+const corsMiddleware = require("./middleware/cors.middleware");
 const filePathMiddleware = require("./middleware/filepath.middleware");
 
 const path = require("path");
 
 app.use(fileUpload({}));
-// app.use(corsMiddleware());
+app.use(corsMiddleware());
 
 app.use(filePathMiddleware(path.resolve(__dirname, "files")));
 
 app.use(express.json());
 app.use(express.static("static"));
-app.use("/api/auth/auth", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.sendStatus(204);
-  res.send("");
-});
-// app.options("/", (req, res) => {
-//   res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
-//   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-//   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-//   res.sendStatus(204);
-// });
+
 app.use("/api/auth", authRouter);
 app.use("/api/files", fileRouter);
 
