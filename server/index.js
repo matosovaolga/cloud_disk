@@ -6,18 +6,9 @@ const authRouter = require("./routes/auth.routes");
 const cors = require("cors");
 const fileRouter = require("./routes/file.routes");
 // const PORT = process.env.PORT || config.get("serverPort");
-var whitelist = ["https://cloud-disk-client-nu.vercel.app/"];
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-};
+
 const app = express();
-app.options("*", cors({ origin: true }));
+app.options("*", cors({ origin: false }));
 
 
 const corsMiddleware = require("./middleware/cors.middleware");
