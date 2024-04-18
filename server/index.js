@@ -33,7 +33,7 @@ app.use(filePathMiddleware(path.resolve(__dirname, "files")));
 
 app.use(express.json());
 app.use(express.static("static"));
-app.use("/", (req, res) => {
+app.use("/api/auth/auth", (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
