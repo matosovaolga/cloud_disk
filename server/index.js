@@ -33,6 +33,9 @@ app.use(filePathMiddleware(path.resolve(__dirname, "files")));
 
 app.use(express.json());
 app.use(express.static("static"));
+app.use("/", (req, res) => {
+	res.send('')
+});
 // app.options("/", (req, res) => {
 //   res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
 //   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
