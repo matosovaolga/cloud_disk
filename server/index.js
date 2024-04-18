@@ -19,7 +19,7 @@ const corsOptions = {
 const app = express();
 app.use(
   cors({
-    allowedHeaders: ["sessionId", "Content-Type"],
+    allowedHeaders: ["sessionId", "Content-Type, Authorization"],
     exposedHeaders: ["sessionId"],
     origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -27,7 +27,7 @@ app.use(
   })
 );
 
-// const corsMiddleware = require("./middleware/cors.middleware");
+const corsMiddleware = require("./middleware/cors.middleware");
 const filePathMiddleware = require("./middleware/filepath.middleware");
 
 const path = require("path");
