@@ -32,8 +32,8 @@ app.use(filePathMiddleware(path.resolve(__dirname, "files")));
 app.use(express.json());
 app.use(express.static("static"));
 
-app.use("/api/auth", authRouter);
-app.use("/api/files", fileRouter);
+app.use("/api/auth", cors(),authRouter);
+app.use("/api/files",cors(), fileRouter);
 
 const start = async () => {
   try {
