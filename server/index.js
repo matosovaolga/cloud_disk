@@ -3,23 +3,23 @@ const mongoose = require("mongoose");
 const config = require("config");
 const fileUpload = require("express-fileupload");
 const authRouter = require("./routes/auth.routes");
-const cors = require("cors");
+// const cors = require("cors");
 const fileRouter = require("./routes/file.routes");
 // const PORT = process.env.PORT || config.get("serverPort");
-const corsOptions = {
-  origin: "",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-  allowedHeaders: [
-    "Content-Type",
-    "Authorization",
-    "Origin",
-    "X-Requested-With",
-    "Accept",
-  ],
-};
+// const corsOptions = {
+//   origin: "",
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   credentials: true,
+//   allowedHeaders: [
+//     "Content-Type",
+//     "Authorization",
+//     "Origin",
+//     "X-Requested-With",
+//     "Accept",
+//   ],
+// };
 const app = express();
-app.use(cors(corsOptions));
+// app.use(cors());
 
 // const corsMiddleware = require("./middleware/cors.middleware");
 const filePathMiddleware = require("./middleware/filepath.middleware");
