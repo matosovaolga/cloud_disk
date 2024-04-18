@@ -17,7 +17,7 @@ const corsOptions = {
   },
 };
 const app = express();
-app.options("*", cors());
+app.options("*", cors({ origin: true }));
 
 
 const corsMiddleware = require("./middleware/cors.middleware");
