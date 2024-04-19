@@ -24,11 +24,11 @@ app.use("/api/auth",  authRouter);
 app.use("/api/files", fileRouter);
 
 const start = async () => {
-	console.log(process.env.PORT);
+	
   try {
     mongoose.connect(config.get("dbUrl"));
-   app.listen(process.env.PORT, () => {
-     console.log(`Server start on port ${process.env.PORT}`);
+   app.listen(3000, () => {
+     console.log(`Server start on port ${3000}`);
    });
   } catch (e) {
     console.log(e);
