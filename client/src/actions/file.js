@@ -16,7 +16,7 @@ export function getFiles(dirId, sort) {
   return async (dispatch) => {
     try {
       dispatch(showLoader());
-      let url = `${process.env.REACT_APP_API_URL}api/files?${
+      let url = `${API_URL}api/files?${
         dirId ? "parent_id=" + dirId + "&" : ""
       }sort=${JSON.stringify(sort)}`;
 
@@ -37,7 +37,7 @@ export function createFolder(dirId, name) {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}api/files`,
+        `${API_URL}api/files`,
         {
           parent_id: dirId,
           type: "dir",
@@ -70,7 +70,7 @@ export function uploadFile(file, dirId) {
       dispatch(addUploadFile(uploadFile));
 
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}api/files/upload`,
+        `${API_URL}api/files/upload`,
         formData,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -124,7 +124,7 @@ export function deleteFile(file) {
   return async (dispatch) => {
     try {
       const response = await axios.delete(
-        `${process.env.REACT_APP_API_URL}api/files?id=${file._id}`,
+        `${API_URL}api/files?id=${file._id}`,
 
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -143,7 +143,7 @@ export function searchFile(search) {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}api/files/search?search=${search}`,
+        `${API_URL}api/files/search?search=${search}`,
 
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

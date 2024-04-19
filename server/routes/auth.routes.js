@@ -77,7 +77,6 @@ router.post(
     try {
       const { email, password } = req.body;
       const user = await User.findOne({ email });
-
       if (!user) {
         return res.status(400).json({ message: "Invalid email or password" });
       }
@@ -88,7 +87,6 @@ router.post(
       const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
         expiresIn: "1h",
       });
-
       return res.json({
         token,
         user: {
