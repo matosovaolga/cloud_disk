@@ -1,11 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const config = require("config");
+
+const dotenv = require("dotenv/config");
 const fileUpload = require("express-fileupload");
 const authRouter = require("./routes/auth.routes");
 const fileRouter = require("./routes/file.routes");
 const app = express();
-// const PORT = process.env.PORT || config.get("serverPort");
+const PORT = process.env.PORT || 4000;
 
 const corsMiddleware = require("./middleware/cors.middleware");
 const filePathMiddleware = require("./middleware/filepath.middleware");
@@ -20,16 +21,15 @@ app.use(filePathMiddleware(path.resolve(__dirname, "files")));
 app.use(express.json());
 app.use(express.static("static"));
 
-app.use("/api/auth",  authRouter);
+app.use("/api/auth", authRouter);
 app.use("/api/files", fileRouter);
 
 const start = async () => {
-	
   try {
-    mongoose.connect(config.get("dbUrl"));
-   app.listen(3000, () => {
-     console.log(`Server start on port ${3000}`);
-   });
+    mongoose.connect(process.env.MONGODB_URL);
+    app.listen(PORT, () => {
+      console.log(`Server start on port ${PORT}`);
+    });
   } catch (e) {
     console.log(e);
   }

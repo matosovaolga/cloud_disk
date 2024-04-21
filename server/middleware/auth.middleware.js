@@ -12,7 +12,7 @@
 			return res.status(401).json({message: 'Auth error: token not found'})
 		}
 
-		const decoded = jwt.verify(token, config.get("secretKey"));
+		const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
 		req.user = decoded;
 		next();
