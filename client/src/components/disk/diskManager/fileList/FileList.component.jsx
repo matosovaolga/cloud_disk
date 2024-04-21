@@ -5,7 +5,6 @@ import DownloadIcon from "../../../icons/DownloadIcon.component";
 import Doc from "../../../icons/Doc.component";
 import XSL from "../../../icons/XSL.component";
 import ListIcon from "../../../icons/ListIcon.component";
-import SmallIcons from "../../../icons/SmallIcons.component";
 import FolderViewIcon from "../../../icons/FolderView.component";
 import "./fileList.scss";
 import { useState } from "react";

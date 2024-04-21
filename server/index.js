@@ -24,7 +24,7 @@ const path = require("path");
 app.use(fileUpload({}));
 
 
-app.use(filePathMiddleware(path.resolve(__dirname, "files")));
+app.use(filePathMiddleware(path.resolve(__dirname, "./files")));
 
 app.use("/api/auth", authRouter);
 app.use("/api/files", fileRouter);
