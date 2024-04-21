@@ -23,16 +23,20 @@ const path = require("path");
 
 app.use(fileUpload({}));
 
+
 app.use(filePathMiddleware(path.resolve(__dirname, "files")));
 
 app.use("/api/auth", authRouter);
 app.use("/api/files", fileRouter);
 
+
+
+
 mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => {
     console.log("Mongodb connected");
-    server.listen(PORT, () => {
+    app.listen(PORT, () => {
       console.log(`Server is listening on port ${PORT}`);
     });
   })

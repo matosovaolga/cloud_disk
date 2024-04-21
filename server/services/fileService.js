@@ -1,7 +1,5 @@
 const fs = require("fs"); // module for working with file system
 
-const config = require("config");
-
 class FileService {
   createDir(req, file) {
     const filePath = this.getPath(req, file);
