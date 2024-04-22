@@ -16,7 +16,7 @@ const User = new Schema({
   },
   diskSpace: {
     type: Number,
-    default: 1024 ** 3 * 10,
+    default: 1024 ** 3 * 1,
   },
   usedSpace: {
     type: Number,
