@@ -10,9 +10,9 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static("static"));
+
 
 const PORT = process.env.PORT || 4000;
 
@@ -23,8 +23,10 @@ const path = require("path");
 
 app.use(fileUpload({}));
 
+app.use(express.json());
+app.use(express.static("static"));
 
-app.use(filePathMiddleware(path.resolve(__dirname, "./files")));
+app.use(filePathMiddleware(path.resolve(__dirname, "tmp")));
 
 app.use("/api/auth", authRouter);
 app.use("/api/files", fileRouter);
@@ -33,7 +35,10 @@ app.use("/api/files", fileRouter);
 
 
 mongoose
-  .connect(process.env.MONGODB_URL)
+  .connect(process.env.MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("Mongodb connected");
     app.listen(PORT, () => {
@@ -42,7 +47,6 @@ mongoose
   })
   .catch((err) => {
     console.log({ err });
-  
   });
 
 module.exports = app;
