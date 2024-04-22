@@ -26,7 +26,8 @@ app.use(fileUpload({}));
 app.use(express.json());
 app.use(express.static("static"));
 
-app.use(filePathMiddleware(path.join(__dirname, "tmp")));
+// app.use(filePathMiddleware(path.join(__dirname, "tmp")));
+app.use(filePathMiddleware(path.join(process.cwd(),"tmp")));
 
 app.use("/api/auth", authRouter);
 app.use("/api/files", fileRouter);
