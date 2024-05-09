@@ -27,6 +27,7 @@ class FileController {
       return res.json(file);
     } catch (e) {
       console.log(e);
+	  if (err.code !== "EEXIST") throw err;
       return res.status(400).json(e);
     }
   }
@@ -68,6 +69,7 @@ class FileController {
       return res.json(files);
     } catch (error) {
       console.log(error);
+	  if (err.code !== "EEXIST") throw err;
       res.status(500).json({ message: "Can not get files" });
     }
   }
@@ -121,6 +123,7 @@ class FileController {
       res.json(dbFile);
     } catch (e) {
       console.log(e);
+	  if (err.code !== "EEXIST") throw err;
       return res.status(500).json({ message: "Upload error" });
     }
   }
