@@ -14,7 +14,7 @@ const DiskSidebar = (props) => {
   const dispatch = useDispatch();
   const currentDir = useSelector((state) => state.files.currentDir);
   const { usedSpace, diskSpace } = props.storage;
-console.log("usedSpace", props);
+  console.log("usedSpace", props);
   const folderStack = useSelector((state) => state.files.folderStack);
 
   const backClickHandler = () => {
@@ -86,7 +86,7 @@ console.log("usedSpace", props);
         </Transition>
       </div>
       <div className={s.storage}>
-        <h3>Storage</h3>
+        <h3>Storage Data</h3>
         <div className={s.storage_progress}>
           <div
             className={cn(
@@ -105,7 +105,6 @@ console.log("usedSpace", props);
         </div>
         <div className={s.storage_size}>
           {sizeFormat(usedSpace)} / {sizeFormat(diskSpace)}
-         
         </div>
       </div>
     </Card>
