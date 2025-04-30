@@ -14,11 +14,11 @@ class FileController {
       const parentFile = await File.findOne({ _id: parent_id });
       if (!parentFile) {
         file.path = name;
-        await fileService.createDir(req, file);
+        await fileService.createDir(file);
       } else {
         file.path = `${parentFile.path}/${file.name}`;
 
-        await fileService.createDir(req, file);
+        await fileService.createDir(file);
         parentFile.children.push(file._id);
         await parentFile.save();
       }
@@ -27,7 +27,7 @@ class FileController {
       return res.json(file);
     } catch (e) {
       console.log(e);
-	  if (err.code !== "EEXIST") throw err;
+      if (err.code !== "EEXIST") throw err;
       return res.status(400).json(e);
     }
   }
@@ -37,6 +37,7 @@ class FileController {
       let { sort } = req.query;
 
       sort = JSON.parse(sort);
+	  console.log(sort);
 
       let files = [];
       switch (sort.label) {
@@ -44,7 +45,7 @@ class FileController {
           files = await File.find({
             user_id: req.user.id,
             parent_id: req.query.parent_id,
-          }).sort({ name: sort.value });
+          }).sort({ name: sort.value});
           break;
         case "type":
           files = await File.find({
@@ -69,7 +70,7 @@ class FileController {
       return res.json(files);
     } catch (error) {
       console.log(error);
-	  if (err.code !== "EEXIST") throw err;
+      if (err.code !== "EEXIST") throw err;
       res.status(500).json({ message: "Can not get files" });
     }
   }
@@ -89,12 +90,12 @@ class FileController {
       user.usedSpace = user.usedSpace + file.size;
 
       if (parent) {
-        path = `${req.filePath}/${user._id}/${parent.path}/${
+        path = `${config.get("filePath")}/${user._id}/${parent.path}/${
           file.name
         }`;
         parent.size += file.size;
       } else {
-        path = `${req.filePath}/${user._id}/${file.name}`;
+        path = `${config.get("filePath")}/${user._id}/${file.name}`;
       }
 
       if (fs.existsSync(path)) {
@@ -123,7 +124,7 @@ class FileController {
       res.json(dbFile);
     } catch (e) {
       console.log(e);
-	  if (err.code !== "EEXIST") throw err;
+      if (err.code !== "EEXIST") throw err;
       return res.status(500).json({ message: "Upload error" });
     }
   }
@@ -135,7 +136,15 @@ class FileController {
         user_id: req.user.id,
       });
 
-      const path = fileService.getPath(req, file);
+        // const path = fileService.getPath(file);
+      const path =
+        config.get("filePath") +
+        "/" +
+        file.user_id +
+        "/" +
+        file.path +
+        "/" +
+        file.name;
 
       if (fs.existsSync(path)) {
         return res.download(path, file.name);

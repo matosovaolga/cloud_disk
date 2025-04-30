@@ -11,26 +11,35 @@ import { Transition } from "react-transition-group";
 
 const Disk = (props) => {
   const dispatch = useDispatch();
-  const { diskSpace, usedSpace } = useSelector(
-    (state) => state.user.currentUser.user
-  );
-  const sort = useSelector((state) => state.files.sortStatus);
+  const user = useSelector((state) => state.user.currentUser);
+    const sort = useSelector((state) => state.files.sortStatus);
   const [folderNameDialog, setFolderNameDialog] = useState(false);
   const currentDir = useSelector((state) => state.files.currentDir);
-
+ 
   const creadeFolderHandler = (name) => {
     dispatch(createFolder(currentDir, name)).then(() => {
       setFolderNameDialog(false);
     });
   };
 
+  console.log(user);
+
   useEffect(() => {
     dispatch(getFiles(currentDir, sort));
-  }, [currentDir, sort]);
+    // dispatch(getFiles(currentDir));
+  }, [currentDir]);
 
   return (
     <div className="disk">
-      <DiskSidebar storage={{ diskSpace, usedSpace, setFolderNameDialog }} />
+      { (
+        <DiskSidebar
+          storage={{
+            diskSpace: user.diskSpace,
+            usedSpace: user.usedSpace,
+            setFolderNameDialog,
+          }}
+        />
+      )}
 
       <DiskManager />
 

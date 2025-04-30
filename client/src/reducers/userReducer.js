@@ -2,7 +2,8 @@ const SET_USER = "SET_USER";
 const LOGOUT_USER = "LOGOUT_USER";
 
 const defaultState = {
-  currentUser: {},
+  currentUser: {
+  },
   isAuth: false,
 };
 

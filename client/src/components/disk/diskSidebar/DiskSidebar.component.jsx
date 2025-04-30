@@ -14,7 +14,7 @@ const DiskSidebar = (props) => {
   const dispatch = useDispatch();
   const currentDir = useSelector((state) => state.files.currentDir);
   const { usedSpace, diskSpace } = props.storage;
-
+console.log("usedSpace", props);
   const folderStack = useSelector((state) => state.files.folderStack);
 
   const backClickHandler = () => {
@@ -105,6 +105,7 @@ const DiskSidebar = (props) => {
         </div>
         <div className={s.storage_size}>
           {sizeFormat(usedSpace)} / {sizeFormat(diskSpace)}
+         
         </div>
       </div>
     </Card>

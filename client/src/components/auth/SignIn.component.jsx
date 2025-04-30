@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useDispatch} from 'react-redux';
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./auth.scss";
 import Card from "../card/Card.component";
@@ -8,11 +8,26 @@ import LogImg from "../../assets/img/2.png";
 import Button from "../button/button.component";
 import Logo from "../logo/Logo.component";
 import { login } from "../../actions/user";
+import ErrorMessage from "../error/Error.component";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const result = await dispatch(login(email, password));
+    if (result instanceof Error || result?.response) {
+      console.log("err ", result?.response?.data.message);
+      if (typeof result?.response?.data.message == "string") {
+        setError(result?.response?.data.message);
+      }
+    } else {
+      console.log("success ", result);
+    }
+  };
 
   return (
     <div className="registration_wrap">
@@ -40,9 +55,9 @@ const SignIn = () => {
               type="password"
               placeholder="Password"
             />
-
+            {error && <ErrorMessage msg={error} />}
             <Button
-              onClick={() => dispatch(login(email, password))}
+              onClick={handleSubmit}
               className="formBtn"
               btnStyle="primary"
               type="button"

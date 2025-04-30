@@ -14,6 +14,8 @@ import JpgIcon from "../../../icons/JPG.component";
 import { sizeFormat } from "../../../../utils/sizeFormat";
 import { setSortStatus, setView } from "../../../../reducers/fileReducer";
 import Button from "../../../button/button.component";
+import TxtIcon from '../../../icons/Txt.component';
+import PngIcon from '../../../icons/Png.component';
 
 const FIcons = {
   pdf: <PDFIcon />,
@@ -22,7 +24,8 @@ const FIcons = {
   xlsx: <XSL />,
   jpg: <JpgIcon />,
   jpeg: <JpgIcon />,
-  png: <JpgIcon />,
+  png: <PngIcon />,
+  txt: <TxtIcon />,
 };
 
 const FileList = (props) => {

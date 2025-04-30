@@ -1,24 +1,25 @@
- const jwt = require('jsonwebtoken');
- const config = require('config');
+const jwt = require("jsonwebtoken");
+const config = require("config");
 
- module.exports = (req, res, next) => {
-	if(req.method === 'OPTIONS') {
-		return	next(); 
-	}
+module.exports = (req, res, next) => {
+  if (req.method === "OPTIONS") {
+    return next();
+  }
 
-	try{
-		const token = req.headers.authorization.split(' ')[1];
-		if(!token) {
-			return res.status(401).json({message: 'Auth error: token not found'})
-		}
+  try {
+    const token = req.headers.authorization.split(" ")[1];
 
-		const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    if (!token) {
+      console.log(token);
+      return res.status(401).json({ message: "Auth error: token not found" });
+    }
 
-		req.user = decoded;
-		next();
+    const decoded = jwt.verify(token, config.get("secretKey"));
 
-	} catch (e) {
-			return res.status(401).json({ message: "Auth error" });
-	}
-
- }
+    req.user = decoded;
+    next();
+  } catch (e) {
+    console.log(e);
+    return res.status(401).json({ message: "Auth error" });
+  }
+};

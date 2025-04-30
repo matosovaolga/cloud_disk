@@ -43,7 +43,7 @@ router.post(
       if (!errors.isEmpty()) {
         return res
           .status(400)
-          .json({ message: "Uncorrect request", errors: errors.mapped() });
+          .json({ message: "Incorrect request", errors: errors.mapped() });
       }
       const { email, password, name } = req.body;
 
@@ -59,7 +59,6 @@ router.post(
       await user.save();
 
       await fileService.createDir(
-        req,
         new File({ user_id: user.id, name: "" })
       );
       return res.json({ message: "User was created successfully" });
@@ -84,7 +83,7 @@ router.post(
       if (!isPassValid) {
         return res.status(400).json({ message: "Invalid email or password" });
       }
-      const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
+      const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
         expiresIn: "1h",
       });
       return res.json({
@@ -111,7 +110,7 @@ router.get("/auth", authMiddleware, async (req, res) => {
 
   try {
     const user = await User.findOne({ _id: req.user.id });
-    const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
+    const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
       expiresIn: "1h",
     });
     return res.json({

@@ -9,10 +9,10 @@ const SET_VIEW = "SET_VIEW";
 
 const defaultState = {
   files: [],
-  sortStatus: {
+    sortStatus: {
     value: 1,
     label: "name",
-  },
+  }, 
   currentDir: null,
   folderStack: [],
   view: "list",
@@ -30,11 +30,11 @@ export default function fileReducer(state = defaultState, action) {
         ...state,
         currentDir: action.payload,
       };
-    case SET_SORT_STATUS:
+      case SET_SORT_STATUS:
       return {
         ...state,
         sortStatus: action.payload,
-      };
+      }; 
     case ADD_FILE:
       return {
         ...state,
@@ -54,11 +54,11 @@ export default function fileReducer(state = defaultState, action) {
           (folder) => folder !== action.payload
         ),
       };
-    case DELETE_FILE:
+        case DELETE_FILE:
       return {
         ...state,
         files: [...state.files.filter((file) => file._id !== action.payload)],
-      };
+      }; 
 
     case SET_VIEW:
       return {

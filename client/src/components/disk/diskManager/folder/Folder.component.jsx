@@ -24,6 +24,7 @@ const Folder = (props) => {
       </div>
       <h3 className="folderTitle">{folder.name}</h3>
       <p>Folder Size: {sizeFormat(folder.size)} </p>
+      <p>Folder Date: {folder.date.slice(0, 10)} </p>
     </Card>
   );
 };

@@ -16,9 +16,10 @@ export function getFiles(dirId, sort) {
   return async (dispatch) => {
     try {
       dispatch(showLoader());
-      let url = `${API_URL}api/files?${
-        dirId ? "parent_id=" + dirId + "&" : ""
-      }sort=${JSON.stringify(sort)}`;
+       let url = `${API_URL}api/files?${
+         dirId ? "parent_id=" + dirId + "&" : ""
+       }sort=${JSON.stringify(sort)}`;
+
 
       const response = await axios.get(url, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -37,7 +38,7 @@ export function createFolder(dirId, name) {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        `${API_URL}api/files`,
+        `http://localhost:4000/api/files`,
         {
           parent_id: dirId,
           type: "dir",
@@ -70,7 +71,7 @@ export function uploadFile(file, dirId) {
       dispatch(addUploadFile(uploadFile));
 
       const response = await axios.post(
-        `${API_URL}api/files/upload`,
+        `http://localhost:4000/api/files/upload`,
         formData,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },

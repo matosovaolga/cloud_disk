@@ -26,16 +26,16 @@ const File = new Schema({
     default: Date.now(),
   },
   user_id: {
-    type: Schema.Types.ObjectId,
+    type: ObjectId,
     ref: "User",
   },
   parent_id: {
-    type: Schema.Types.ObjectId,
+    type: ObjectId,
     ref: "File",
   },
   children: [
     {
-      type: Schema.Types.ObjectId,
+      type: ObjectId,
       ref: "File",
     },
   ],
