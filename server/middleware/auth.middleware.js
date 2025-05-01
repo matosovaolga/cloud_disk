@@ -10,16 +10,18 @@ module.exports = (req, res, next) => {
     const token = req.headers.authorization.split(" ")[1];
 
     if (!token) {
-      console.log(token);
+    
       return res.status(401).json({ message: "Auth error: token not found" });
     }
 
     const decoded = jwt.verify(token, config.get("secretKey"));
 
+	
+
     req.user = decoded;
     next();
   } catch (e) {
-    console.log(e);
+    console.log('auth err', e);
     return res.status(401).json({ message: "Auth error" });
   }
 };

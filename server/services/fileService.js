@@ -20,17 +20,18 @@ class FileService {
     });
   }
 
-  deleteFile(req, file) {
-    const path = `${config.get("filePath")}/${file.user_id}/${file.path}`;
+  deleteFile(file) {
+    const path = this.getPath(file);
     if (file.type === "dir") {
       fs.rmdirSync(path);
     } else {
+
       fs.unlinkSync(path);
     }
   }
 
-  getPath(req, file) {
-    return `${req.filePath}/${file.user_id}/${file.path}`;
+  getPath(file) {
+    return `${config.get("filePath")}/${file.user_id}/${file.path}`;
   }
 }
 

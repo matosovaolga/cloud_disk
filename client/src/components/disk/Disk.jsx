@@ -22,12 +22,10 @@ const Disk = (props) => {
     });
   };
 
-  console.log(user);
-
   useEffect(() => {
     dispatch(getFiles(currentDir, sort));
-    // dispatch(getFiles(currentDir));
-  }, [currentDir]);
+  
+  }, [currentDir, sort]);
 
   return (
     <div className="disk">

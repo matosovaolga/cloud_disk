@@ -16,7 +16,7 @@ const DiskManager = (props) => {
   const dispatch = useDispatch();
   const loader = useSelector((state) => state.app.loader);
    const sort = useSelector((state) => state.files.sortStatus);
-//   const [sort, setSort] = useState("type");
+
   const folders = useSelector((state) => state.files.files)
     .filter((file) => file.type === "dir")
     .map((folder) => (
@@ -56,12 +56,12 @@ const DiskManager = (props) => {
     });
   };
 
-  const searchHandler = (e) => {
-    setSearch(e.target.value);
+  const searchHandler = (value) => {
+    setSearch(value);
     if (searchTimeout) {
       clearTimeout(searchTimeout);
     }
-    if (e.target.value !== "") {
+    if (value !== "") {
       setSearchTimeout(
         setTimeout(
           (value) => {
@@ -69,12 +69,12 @@ const DiskManager = (props) => {
             dispatch(searchFile(value));
           },
           1000,
-          e.target.value
+          value
         )
       );
     } else {
-         dispatch(getFiles(currentDir, sort));
-    //   dispatch(getFiles(currentDir));
+      dispatch(getFiles(currentDir, sort));
+      //   dispatch(getFiles(currentDir));
     }
   };
 

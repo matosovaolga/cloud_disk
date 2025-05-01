@@ -16,6 +16,7 @@ export function getFiles(dirId, sort) {
   return async (dispatch) => {
     try {
       dispatch(showLoader());
+	  
        let url = `${API_URL}api/files?${
          dirId ? "parent_id=" + dirId + "&" : ""
        }sort=${JSON.stringify(sort)}`;

@@ -37,7 +37,6 @@ class FileController {
       let { sort } = req.query;
 
       sort = JSON.parse(sort);
-	  console.log(sort);
 
       let files = [];
       switch (sort.label) {
@@ -45,7 +44,7 @@ class FileController {
           files = await File.find({
             user_id: req.user.id,
             parent_id: req.query.parent_id,
-          }).sort({ name: sort.value});
+          }).sort({ name: sort.value });
           break;
         case "type":
           files = await File.find({
@@ -136,15 +135,7 @@ class FileController {
         user_id: req.user.id,
       });
 
-        // const path = fileService.getPath(file);
-      const path =
-        config.get("filePath") +
-        "/" +
-        file.user_id +
-        "/" +
-        file.path +
-        "/" +
-        file.name;
+      const path = fileService.getPath(file);
 
       if (fs.existsSync(path)) {
         return res.download(path, file.name);
@@ -175,13 +166,15 @@ class FileController {
         parent.size = parent.size - file.size;
       }
 
-      if (!file) return res.status(400).json({ message: "File not found" });
+       if (!file) {
+         return res.status(400).json({ message: "file not found" });
+       }
 
       if (parent) {
         await parent.save();
       }
 
-      fileService.deleteFile(req, file);
+      fileService.deleteFile(file);
 
       user.usedSpace = user.usedSpace - file.size;
 
