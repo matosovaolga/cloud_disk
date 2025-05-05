@@ -4,7 +4,7 @@ const File = require("../models/File");
 
 class FileService {
   createDir(file) {
-    const filePath = `${config.get("filePath")}/${file.user_id}/${file.path}`;
+    const filePath = `${process.env.FILE_PATH}/${file.user_id}/${file.path}`;
     return new Promise((resolve, reject) => {
       try {
         if (!fs.existsSync(!filePath)) {
@@ -31,7 +31,7 @@ class FileService {
   }
 
   getPath(file) {
-    return `${config.get("filePath")}/${file.user_id}/${file.path}`;
+    return `${process.env.FILE_PATH}/${file.user_id}/${file.path}`;
   }
 }
 

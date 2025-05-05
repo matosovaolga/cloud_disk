@@ -1,0 +1,10 @@
+{
+  "NODE_ENV": "production",
+  "PORT": 4000,
+
+  "DB_URL": "mongodb+srv://separateSpace:gT0JxypsNbw84OQ4@cloud.kygeedl.mongodb.net/cloud?retryWrites=true&w=majority",
+
+  "SECRET_KEY": "SSPC-cloud-files",
+  "FILE_PATH": "folder_for_uploaded_files",
+  "STATIC_PATH": "folder_static_files"
+}

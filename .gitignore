@@ -13,6 +13,8 @@ static
 /.pnp
 .pnp.js
 .DS_Store
+/server/default.json
+/client/default.json
 # testing
 /coverage
 

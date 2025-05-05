@@ -83,7 +83,7 @@ router.post(
       if (!isPassValid) {
         return res.status(400).json({ message: "Invalid email or password" });
       }
-      const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
+      const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
         expiresIn: "1h",
       });
       return res.json({
@@ -110,7 +110,7 @@ router.get("/auth", authMiddleware, async (req, res) => {
 
   try {
     const user = await User.findOne({ _id: req.user.id });
-    const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
+    const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
       expiresIn: "1h",
     });
     return res.json({

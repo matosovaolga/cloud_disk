@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../reducers/userReducer";
 import UserTieIcon from "../icons/UserTie.component";
-import { API_URL } from "../../config";
+
 
 const Navbar = () => {
   const isAuth = useSelector((state) => state.user.isAuth);
@@ -15,7 +15,7 @@ const Navbar = () => {
 
   const avatarIcon = currUser.avatar ? (
     <div className="defaultAva">
-      <img src={API_URL + currUser.avatar} alt="" />
+      <img src={process.env.REACT_APP_API_URL + currUser.avatar} alt="" />
     </div>
   ) : (
     <div className="defaultAva">

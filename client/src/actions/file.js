@@ -10,14 +10,14 @@ import {
   showUploader,
 } from "../reducers/upload.reducer";
 import { hideLoader, showLoader } from "../reducers/appReducer";
-import { API_URL } from "../config";
+
 
 export function getFiles(dirId, sort) {
   return async (dispatch) => {
     try {
       dispatch(showLoader());
-	  
-       let url = `${API_URL}api/files?${
+
+       let url = `${process.env.REACT_APP_API_URL}/files?${
          dirId ? "parent_id=" + dirId + "&" : ""
        }sort=${JSON.stringify(sort)}`;
 
@@ -39,7 +39,7 @@ export function createFolder(dirId, name) {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/api/files`,
+        `${process.env.REACT_APP_API_URL}/files`,
         {
           parent_id: dirId,
           type: "dir",
@@ -72,7 +72,7 @@ export function uploadFile(file, dirId) {
       dispatch(addUploadFile(uploadFile));
 
       const response = await axios.post(
-        `http://localhost:4000/api/files/upload`,
+        `${process.env.REACT_APP_API_URL}/files/upload`,
         formData,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -105,11 +105,14 @@ export function uploadFile(file, dirId) {
 }
 
 export async function downloadFile(file) {
-  const response = await fetch(`${API_URL}api/files/download?id=${file._id}`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
+  const response = await fetch(
+    `${process.env.REACT_APP_API_URL}/files/download?id=${file._id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
   if (response.status === 200) {
     const blob = await response.blob();
     const downloadUrl = window.URL.createObjectURL(blob);
@@ -126,7 +129,7 @@ export function deleteFile(file) {
   return async (dispatch) => {
     try {
       const response = await axios.delete(
-        `${API_URL}api/files?id=${file._id}`,
+        `${process.env.REACT_APP_API_URL}/files?id=${file._id}`,
 
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -145,7 +148,7 @@ export function searchFile(search) {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `${API_URL}api/files/search?search=${search}`,
+        `${process.env.REACT_APP_API_URL}/files/search?search=${search}`,
 
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
