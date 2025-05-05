@@ -32,8 +32,8 @@ const Disk = (props) => {
       { (
         <DiskSidebar
           storage={{
-            diskSpace: user.diskSpace,
-            usedSpace: user.usedSpace,
+            diskSpace: user.diskSpace || 0,
+            usedSpace: user.usedSpace || 0,
             setFolderNameDialog,
           }}
         />
