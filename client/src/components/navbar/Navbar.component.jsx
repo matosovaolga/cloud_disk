@@ -9,7 +9,7 @@ import UserTieIcon from "../icons/UserTie.component";
 
 const Navbar = () => {
   const isAuth = useSelector((state) => state.user.isAuth);
-  const currUser = useSelector((state) => state.user.currentUser);
+  const currUser = useSelector((state) => state.user.currentUser) || {};
 
   const dispatch = useDispatch();
 
