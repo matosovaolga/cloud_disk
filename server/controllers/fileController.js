@@ -98,8 +98,17 @@ class FileController {
       if (fs.existsSync(path)) {
         return res.status(400).json({ message: "File already exists" });
       }
-	  console.log(path);
-      file.mv(path);
+      console.log(console.log(process.env.FILE_PATH));
+      const dir = path.dirname(path);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+      file.mv(path, (err) => {
+        if (err) {
+          console.log("File move error:", err);
+          return res.status(500).json({ message: "File move failed" });
+        }
+      });
 
       const type = file.name.split(".").pop();
       let filePath = file.name;
@@ -164,9 +173,9 @@ class FileController {
         parent.size = parent.size - file.size;
       }
 
-       if (!file) {
-         return res.status(400).json({ message: "file not found" });
-       }
+      if (!file) {
+        return res.status(400).json({ message: "file not found" });
+      }
 
       if (parent) {
         await parent.save();
