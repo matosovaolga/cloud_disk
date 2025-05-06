@@ -100,15 +100,18 @@ class FileController {
         return res.status(400).json({ message: "File already exists" });
       }
       console.log(process.env.FILE_PATH);
-    //   const dir = path.dirname(path);
-   /*    if (!fs.existsSync(dir)) {
+      //   const dir = path.dirname(path);
+      /*    if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
       } */
-      file.mv(path, (err) => {
-        if (err) {
-          console.log("File move error:", err);
-          return res.status(500).json({ message: "File move failed" });
-        }
+      await new Promise((resolve, reject) => {
+        file.mv(path, (err) => {
+          if (err) {
+            console.log("File move error:", err);
+            return reject(err);
+          }
+          resolve();
+        });
       });
 
       const type = file.name.split(".").pop();
@@ -132,7 +135,9 @@ class FileController {
     } catch (e) {
       console.log(e);
       if (e.code !== "EEXIST") throw e;
-      return res.status(500).json({ message: "Upload error" });
+      return res
+        .status(500)
+        .json({ message: "Upload error", error: e.message });
     }
   }
 
