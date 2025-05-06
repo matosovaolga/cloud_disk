@@ -82,6 +82,7 @@ class FileController {
         user_id: req.user.id,
         _id: req.body.parent_id,
       });
+      console.log(file);
       const user = await User.findOne({ _id: req.user.id });
       if (user.usedSpace + file.size > user.diskSpace) {
         return res.status(400).json({ message: "There no space on the disk" });
@@ -94,15 +95,15 @@ class FileController {
       } else {
         path = `${process.env.FILE_PATH}/${user._id}/${file.name}`;
       }
-
+      console.log(path);
       if (fs.existsSync(path)) {
         return res.status(400).json({ message: "File already exists" });
       }
-      console.log(console.log(process.env.FILE_PATH));
-      const dir = path.dirname(path);
-      if (!fs.existsSync(dir)) {
+      console.log(process.env.FILE_PATH);
+    //   const dir = path.dirname(path);
+   /*    if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
-      }
+      } */
       file.mv(path, (err) => {
         if (err) {
           console.log("File move error:", err);
