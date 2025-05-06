@@ -131,7 +131,7 @@ class FileController {
       res.json(dbFile);
     } catch (e) {
       console.log(e);
-      if (err.code !== "EEXIST") throw err;
+      if (e.code !== "EEXIST") throw e;
       return res.status(500).json({ message: "Upload error" });
     }
   }
