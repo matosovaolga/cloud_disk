@@ -98,7 +98,7 @@ class FileController {
       if (fs.existsSync(path)) {
         return res.status(400).json({ message: "File already exists" });
       }
-
+	  console.log(path);
       file.mv(path);
 
       const type = file.name.split(".").pop();
