@@ -1,9 +1,18 @@
 const fileService = require("../services/fileService");
-const config = require("config");
 const fs = require("fs");
 const User = require("../models/User");
 const File = require("../models/File");
 const uuid = require("uuid");
+const pathModule = require("path");
+
+function folderExists(path) {
+  try {
+    const stats = fs.statSync(path);
+    return stats.isDirectory();
+  } catch (err) {
+    return false;
+  }
+}
 
 class FileController {
   async createDir(req, res) {
@@ -82,28 +91,43 @@ class FileController {
         user_id: req.user.id,
         _id: req.body.parent_id,
       });
-      console.log(file);
+
       const user = await User.findOne({ _id: req.user.id });
       if (user.usedSpace + file.size > user.diskSpace) {
         return res.status(400).json({ message: "There no space on the disk" });
       }
-      user.usedSpace = user.usedSpace + file.size;
+      user.usedSpace += file.size;
 
+      // Construct path
       if (parent) {
         path = `${process.env.FILE_PATH}/${user._id}/${parent.path}/${file.name}`;
         parent.size += file.size;
       } else {
         path = `${process.env.FILE_PATH}/${user._id}/${file.name}`;
       }
-      console.log(path);
+
+      // Ensure directory exists
+      const dir = folderExists(`${process.env.FILE_PATH}/${user._id}`);
+
+      console.log(`${process.env.FILE_PATH}/${user._id}`);
+      console.log(dir);
+
+      try {
+        if (!fs.existsSync(dir)) {
+          fs.mkdirSync(`${process.env.FILE_PATH}/${user._id}`, {
+            recursive: true,
+          });
+        }
+      } catch (err) {
+        console.error("Error creating directory:", err);
+        return res.status(500).json({ message: "Error creating directory" });
+      }
+
       if (fs.existsSync(path)) {
         return res.status(400).json({ message: "File already exists" });
       }
-      console.log(process.env.FILE_PATH);
-      //   const dir = path.dirname(path);
-      /*    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-      } */
+
+      // Move the file
       await new Promise((resolve, reject) => {
         file.mv(path, (err) => {
           if (err) {
@@ -114,6 +138,7 @@ class FileController {
         });
       });
 
+      // Save file record to DB
       const type = file.name.split(".").pop();
       let filePath = file.name;
       if (parent) filePath = `${parent.path}/${file.name}`;
@@ -133,7 +158,6 @@ class FileController {
 
       res.json(dbFile);
     } catch (e) {
-      console.log(e);
       if (e.code !== "EEXIST") throw e;
       return res
         .status(500)
