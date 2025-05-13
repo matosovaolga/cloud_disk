@@ -1,0 +1,128 @@
+.filesWrap {
+  background-color: #fff;
+  margin-top: 40px;
+}
+.filesWrap__header {
+  display: flex;
+  justify-content: space-between;
+}
+.filesWrap__header .viewListBtns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.filesWrap__header .viewListBtns svg {
+  height: 20px;
+  transition: all 0.1s ease;
+}
+.filesWrap__header .viewListBtns svg path {
+  transition: all 0.4s ease;
+}
+.filesWrap__header .viewListBtns svg:hover {
+  cursor: pointer;
+  fill: #0999b9;
+}
+.filesWrap__header .viewListBtns svg:hover path {
+  fill: #0999b9;
+}
+.filesWrap__header h4 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.fileIcon svg {
+  height: 25px;
+  width: auto;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 60px 1fr auto 100px 80px;
+}
+.row.header {
+  background: #f2f2f7;
+  font-weight: 500;
+  border-top: 1px solid #010101;
+  border-bottom: 1px solid #010101;
+}
+
+.column {
+  padding: 12px 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+.column.sort {
+  cursor: pointer;
+}
+
+.actions {
+  position: relative;
+}
+.actions ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 10px;
+}
+.actions ul li {
+  cursor: pointer;
+}
+.actions ul li svg {
+  width: auto;
+  height: 20px;
+  transition: all 0.4s ease;
+}
+.actions ul li.removeIcon svg {
+  fill: #ec584c;
+}
+.actions ul li:hover svg {
+  fill: #43adb6;
+}
+
+.actionList {
+  right: 0;
+  width: 200px;
+}
+
+.file_card {
+  border: 1px solid #adb5bd;
+  border-radius: 10px;
+  display: grid;
+  gap: 10px;
+  overflow: hidden;
+}
+.file_card .file_name {
+  padding: 0 10px;
+}
+.file_card .actions {
+  justify-content: space-between;
+}
+.file_card .fileIcon {
+  border-bottom: 1px solid #adb5bd;
+  padding: 10px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+.file_card .fileIcon svg {
+  height: 50px;
+}
+
+.plate {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+}
+.plate .buttonIcon {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.plate .buttonIcon svg {
+  height: 20px;
+  max-width: 30px;
+  fill: #fff;
+}

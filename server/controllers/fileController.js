@@ -164,7 +164,7 @@ class FileController {
         .json({ message: "Upload error", error: e.message });
     }
   }
-
+ 
   async downloadFile(req, res) {
     try {
       const file = await File.findOne({

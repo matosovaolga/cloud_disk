@@ -4,8 +4,7 @@ import Logo from "../logo/Logo.component";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../reducers/userReducer";
-import UserTieIcon from "../icons/UserTie.component";
-
+import Avatar from "../avatar/Avatar.component";
 
 const Navbar = () => {
   const isAuth = useSelector((state) => state.user.isAuth);
@@ -13,15 +12,7 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
 
-  const avatarIcon = currUser.avatar ? (
-    <div className="defaultAva">
-      <img src={process.env.REACT_APP_API_URL + currUser.avatar} alt="" />
-    </div>
-  ) : (
-    <div className="defaultAva">
-      <UserTieIcon />
-    </div>
-  );
+
 
   return (
     <div className="navbar">
@@ -41,7 +32,12 @@ const Navbar = () => {
             </NavLink>
           </div>
         )}
-        {isAuth && <NavLink to="/profile">{avatarIcon}</NavLink>}
+        {isAuth && (
+          <NavLink to="/profile">
+	
+            <Avatar />
+          </NavLink>
+        )}
         {isAuth && (
           <div
             className="navbar_signout"

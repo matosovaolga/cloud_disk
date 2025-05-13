@@ -2,13 +2,11 @@
   display: grid;
   gap: 20px;
   padding: 30px;
-
   grid-template-columns: 20% 1fr;
-
-  .buttonGroup {
-    display: flex;
-    gap: 30px;
-  }
+}
+.profileSettings .buttonGroup {
+  display: flex;
+  gap: 30px;
 }
 
 .card_body {
@@ -22,11 +20,10 @@
 .addResourceLink {
   display: flex;
   justify-self: center;
-
-  &:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
+}
+.addResourceLink:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .uploadFile_input {
@@ -43,5 +40,5 @@
 
 .buttonGroup {
   margin-top: 20px;
-   justify-self: center;
+  justify-self: center;
 }

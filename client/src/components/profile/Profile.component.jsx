@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import "./profile.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../button/button.component";
 import FileIcon from "../icons/FileIcon.component";
 import { deleteAvatar, uploadAvatar } from "../../actions/user";
+import Card from "../card/Card.component";
+import Avatar from "../avatar/Avatar.component";
+import cn from 'classnames'
 
 const Profile = () => {
   const [file, setFile] = useState(null);
+  const user = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   const fileUploadhandler = (event) => {
     const file = event.target.files[0];
@@ -23,12 +27,14 @@ const Profile = () => {
   };
   return (
     <div className="profileSettings">
-      <div className="uploadFile">
-        <label htmlFor="uploadFile_input" className="uploadFile_label">
-          <span className="addResourceLink">
-            <FileIcon /> Upload avatar
-          </span>
-        </label>
+      <Card className="uploadFile">
+        <Avatar className="profile_avatar" />
+        <label
+          htmlFor="uploadFile_input"
+          className="uploadFile_label addResourceLink"
+        >
+          Upload avatar
+        </label>{" "}
         <input
           type="file"
           id="uploadFile_input"
@@ -36,17 +42,24 @@ const Profile = () => {
           // multiple={true}
           onChange={(event) => fileUploadhandler(event)}
           className="uploadFile_input"
-        />
-      </div>
-      <p>File name: {file?.name}</p>
-      <div className="buttonGroup">
-        <Button btnStyle="primary" onClick={handleUploadAvatar}>
-          Upload
-        </Button>
-        <Button btnStyle="error" onClick={handleDeleteAvatar}>
-          Delete
-        </Button>
-      </div>
+        />{" "}
+        {file?.name && <p>File name: {file?.name}</p>}
+        <div className="buttonGroup">
+          <Button btnStyle="primary" onClick={handleUploadAvatar}>
+            Save
+          </Button>
+          <Button btnStyle="error" onClick={handleDeleteAvatar}>
+            Delete
+          </Button>
+        </div>
+      </Card>
+      <Card>
+        <h3>Edit Profile</h3>
+        <div>
+          <p>{user.name}</p>
+          <p>{user.email}</p>
+        </div>
+      </Card>{" "}
     </div>
   );
 };
