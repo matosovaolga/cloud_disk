@@ -12,10 +12,10 @@ import { Transition } from "react-transition-group";
 const Disk = (props) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
-    const sort = useSelector((state) => state.files.sortStatus);
+  const sort = useSelector((state) => state.files.sortStatus);
   const [folderNameDialog, setFolderNameDialog] = useState(false);
   const currentDir = useSelector((state) => state.files.currentDir);
- 
+
   const creadeFolderHandler = (name) => {
     dispatch(createFolder(currentDir, name)).then(() => {
       setFolderNameDialog(false);
@@ -24,12 +24,11 @@ const Disk = (props) => {
 
   useEffect(() => {
     dispatch(getFiles(currentDir, sort));
-  
   }, [currentDir, sort]);
 
   return (
     <div className="disk">
-      { (
+      {
         <DiskSidebar
           storage={{
             diskSpace: user.diskSpace || 0,
@@ -37,7 +36,7 @@ const Disk = (props) => {
             setFolderNameDialog,
           }}
         />
-      )}
+      }
 
       <DiskManager />
 

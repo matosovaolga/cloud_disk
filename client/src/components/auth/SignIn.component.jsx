@@ -9,16 +9,23 @@ import Button from "../button/button.component";
 import Logo from "../logo/Logo.component";
 import { login } from "../../actions/user";
 import ErrorMessage from "../error/Error.component";
+import { useAuth } from "../../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const [error, setError] = useState("");
+  const { loginProvider } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     const result = await dispatch(login(email, password));
+	loginProvider(result.token);
+	navigate("/");
     if (result instanceof Error || result?.response) {
       console.log("err ", result?.response?.data.message);
       if (typeof result?.response?.data.message == "string") {

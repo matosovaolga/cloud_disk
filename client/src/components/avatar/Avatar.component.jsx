@@ -7,7 +7,7 @@ const Avatar = ({ className, ...props }) => {
 
   const avatarIcon = user.avatar ? (
     <div className={cn("defaultAva", className)} {...props}>
-      <img src={process.env.REACT_APP_API_URL + user.avatar} alt="" />
+      <img src={process.env.REACT_APP_API_URL.replace('api', '') + user.avatar} alt="" />
     </div>
   ) : (
     <div className={cn("defaultAva", className)} {...props}>

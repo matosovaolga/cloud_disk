@@ -1,42 +1,54 @@
-import React, { useEffect } from "react";
-import Navbar from "./components/navbar/Navbar.component";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./app.scss";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Registration from "./components/auth/Registration.component";
+import AuthRoute from "./AuthRoute";
+import GuestRoute from "./GuestRoute";
 import SignIn from "./components/auth/SignIn.component";
-import { useDispatch, useSelector } from "react-redux";
-import { auth } from "./actions/user";
+import Registration from "./components/auth/Registration.component";
 import Disk from "./components/disk/Disk";
 import Profile from "./components/profile/Profile.component";
+import Navbar from "./components/navbar/Navbar.component";
 
 function App() {
-  const isAuth = useSelector((state) => state.user.isAuth);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(auth());
-  }, []);
-
   return (
-    <BrowserRouter>
-  
-      <div className="App">
-        <Navbar />
-        {!isAuth ? (
-          <Routes>
-            <Route path="/registration" element={<Registration />} />
-            <Route path="/login" element={<SignIn />} />
-            <Route path="*" element={<Navigate to="/login" />} />
-          </Routes>
-        ) : (
-          <Routes>
-            <Route path="/" element={<Disk />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        )}
-      </div>
-    </BrowserRouter>
+    <div className="App">
+      <Navbar />
+
+      <Routes>
+        <Route
+          path="/login"
+          element={
+            <GuestRoute>
+              <SignIn />
+            </GuestRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <GuestRoute>
+              <Registration />
+            </GuestRoute>
+          }
+        />
+        <Route path="*" element={<SignIn />} />
+        <Route
+          path="/"
+          element={
+            <AuthRoute>
+              <Disk />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <AuthRoute>
+              <Profile />
+            </AuthRoute>
+          }
+        />
+      </Routes>
+    </div>
   );
 }
 
