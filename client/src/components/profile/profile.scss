@@ -35,13 +35,23 @@
 }
 
 .profile_avatar {
-  width: 80px;
-  height: 80px;
+  width: 80px !important;
+  height: 80px !important;
   margin-bottom: 10px;
   justify-self: center;
 }
 
+.file_name {
+  text-align: center;
+}
+
+.form {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
 .buttonGroup {
   margin-top: 20px;
-   justify-self: center;
+  justify-self: center;
 }

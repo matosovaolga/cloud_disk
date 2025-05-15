@@ -1,5 +1,5 @@
-import { createContext, use, useContext, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { createContext,  useContext, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { auth } from "./actions/user";
 const AuthContext = createContext();
 
